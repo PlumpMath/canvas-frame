@@ -1,8 +1,10 @@
 # canvas-frame
 
 A Clojure library designed to ... well, a place to play with clojure
-mostly for myself).  Although right now (1/8/2013) the project is runnable
-thanks to [Leiningen][Leiningen]. 
+mostly for myself.  Right now (1/8/2013) the project is runnable
+thanks to [Leiningen][Leiningen], but it doesn't do anythnig but 
+generate a single java swing frame and display a mathematically
+generated image. (Screen shots forth coming.)
 
 ## Usage
 
