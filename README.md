@@ -20,11 +20,17 @@ The hope is that eventually a number of different images can be generated
 by picking the 'name' (or something -- haven't really decided on
 implementation).
 
+## Generated Images
+
+(`lein run start`)
+
+![ScreenShot] (https://raw.github.com/lcaballero/canvas-frame/master/images/diamonds.png)
+
 ## License
 
 Copyright © 2013 FIXME
 
 Distributed under the Eclipse Public License, the same as Clojure.
 
-
 [Leiningen]: https://github.com/technomancy/leiningen "Source Location for Leiningen - Clojure version of Ruby Gem and Bundler"
+
