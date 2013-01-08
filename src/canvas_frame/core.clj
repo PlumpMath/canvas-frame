@@ -2,7 +2,8 @@
   (use [canvas-frame.helpers]
        [canvas-frame.diamonds :as diamonds])
   (:import [javax.swing JFrame JPanel]
-           [java.awt.geom Path2D$Double])
+           [java.awt.image BufferedImage]
+           [java.awt.geom Path2D$Double AffineTransform])
   (:gen-class))
 
 (defn start-frame [config]
@@ -12,9 +13,21 @@
       (.setContentPane
        (proxy [JPanel] []
          (paintComponent [g]
-           (binding [*g* (set-antialiased g) *dim* dim]
-             (setup)
-             (draw)))))
+           (let [panel this
+                 buffer (BufferedImage. (:w dim), (:h dim), BufferedImage/TYPE_INT_ARGB)]
+             (binding [*dim* dim
+                       *buffer* buffer
+                       *g* (.createGraphics buffer)]
+               (set-antialiased)
+               (setup)
+               (draw)
+               ;; Write drawing to file
+               (write-image)
+               ;; Draw modified buffer to the panel
+               (.drawImage g
+                           *buffer*
+                           (AffineTransform. 1.0 0.0 0.0 1.0 0.0 0.0)
+                           nil))))))
       (.setTitle title)
       (.setSize (:w dim) (:h dim))
       (.setDefaultCloseOperation JFrame/EXIT_ON_CLOSE)

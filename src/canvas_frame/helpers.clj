@@ -1,13 +1,17 @@
 (ns canvas-frame.helpers
-  (:import [java.awt Color RenderingHints]))
+  (:import [java.awt Color RenderingHints]
+           [javax.imageio ImageIO]
+           [java.io File]))
 
 (def ^:dynamic *g* nil)
 (def ^:dynamic *dim* {:w 400 :h 400})
+(def ^:dynamic *panel* nil)
+(def ^:dynamic *buffer* nil)
 
-(defn height [] (:w *dim*))
-(defn width [] (:h *dim*))
-(defn center-x [] (/ (height) 2))
-(defn center-y [] (/ (width) 2))
+(defn frame-height [] (:w *dim*))
+(defn frame-width [] (:h *dim*))
+(defn canvas-center-x [] (/ (frame-height) 2))
+(defn canvas-center-y [] (/ (frame-width) 2))
 
 (defn to-cartesian-coords []
   (doto *g*
@@ -15,10 +19,10 @@
 
 (defn to-canvas-center []
   (doto *g*
-    (.translate (center-x) (center-y))))
+    (.translate (canvas-center-x) (canvas-center-y))))
 
-(defn set-antialiased [g]
-  (doto g
+(defn set-antialiased []
+  (doto *g*
     (.setRenderingHint
      RenderingHints/KEY_ANTIALIASING
      RenderingHints/VALUE_ANTIALIAS_ON)))
@@ -26,10 +30,12 @@
 (defn clear-rect []
   (doto *g*
     (.setColor Color/WHITE)
-    (.fillRect 0 0 (width) (height))))
+    (.fillRect 0 0 (frame-width) (frame-height))))
 
 (defn default-drawing-setup []
   (clear-rect)
   (to-canvas-center)
   (to-cartesian-coords))
 
+(defn write-image []
+  (ImageIO/write *buffer* "gif" (File. "images/diamonds.png")))
