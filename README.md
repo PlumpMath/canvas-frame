@@ -11,7 +11,7 @@ generated image.
 You can see the progress by running:
 
 ```
-%> lein run start
+%> lein run dia
 ```
 
 `start` here is just a command / keyword used to pick the image.  This
@@ -22,9 +22,13 @@ implementation).
 
 ## Generated Images
 
-(`lein run start`)
+`lein run dia`
 
 ![ScreenShot] (https://raw.github.com/lcaballero/canvas-frame/master/images/diamonds.png)
+
+`lein run bez`
+
+![ScreenShot] (https://raw.github.com/lcaballero/canvas-frame/master/images/bezier-play.png)
 
 ## License
 

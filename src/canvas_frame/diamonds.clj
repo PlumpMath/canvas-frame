@@ -1,7 +1,7 @@
 (ns canvas-frame.diamonds
   (use [canvas-frame.helpers])
   (:import [java.awt.geom Path2D$Double]
-           [java.awt Color RenderingHints]))
+           [java.awt Color]))
 
 (def steps 34)
 (def _2pi (* 2 Math/PI))
@@ -16,16 +16,9 @@
    (range 0 _2pi (/ _2pi steps))
    (range 0.25 1 (/ 0.75 steps))))
 
-(defn lines []
-  (doto *g* (.setColor Color/RED))
-  (doall
-   (for [x (range 0 300 10)]
-     (doto *g*
-       (.drawLine 0 0 x 100)))))
-
 (defn shape [h v]
   (let [path (Path2D$Double.)]
-    (doto path
+    (doto path 
       (.moveTo 0     v)
       (.lineTo h     0)
       (.lineTo 0     (- v))
@@ -49,5 +42,5 @@
               arc
               (shape (horizontal-size scale) (vertical-size scale))))))
 
-(defn setup-diamonds []
+(defn draw-diamonds []
   (diamonds *g*))

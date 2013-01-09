@@ -37,5 +37,5 @@
   (to-canvas-center)
   (to-cartesian-coords))
 
-(defn write-image []
-  (ImageIO/write *buffer* "gif" (File. "images/diamonds.png")))
+(defn write-image [image-name]
+  (ImageIO/write *buffer* "gif" (File. (str "images/" image-name))))
